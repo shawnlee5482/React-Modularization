@@ -54,91 +54,8 @@
 
 	// This file holds our JSON array of turtles
 	var data = __webpack_require__(230);
-
-	var NinjaList = React.createClass({
-	  displayName: 'NinjaList',
-
-	  render: function () {
-	    console.log('this.props.turtles: ', this.props.turtles);
-	    var ninjas = this.props.turtles.map(function (turtle, idx) {
-	      return React.createElement(
-	        'li',
-	        { key: idx },
-	        React.createElement(
-	          Link,
-	          { to: 'ninjas/' + turtle.id },
-	          turtle.name
-	        )
-	      )
-	      // <li key={idx}>
-	      //   <a href="#">{turtle.name}</a>
-	      // </li>
-	      ;
-	    });
-	    return React.createElement(
-	      'ul',
-	      null,
-	      ninjas
-	    );
-	  }
-	});
-
-	var NinjaComponent = React.createClass({
-	  displayName: 'NinjaComponent',
-
-	  render: function () {
-	    console.log('in NinjaComponent render: ', this.props.route.data);
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Greetings Ninja!'
-	      ),
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Click on a ninja for more information'
-	      ),
-	      React.createElement(NinjaList, { turtles: this.props.route.data }),
-	      this.props.children
-	    );
-	  }
-	});
-
-	// ReactDOM.render(<NinjaComponent data={data}/>, document.getElementById('app'));
-
-	function NinjaDescription(props) {
-	  // Here's the route parameter (notice it's a string)
-	  var routeID = props.params.id;
-	  // Let's pass it into the method our Route parent provided and assign the result to a variable
-	  var ninja = props.route.fetchTurtle(parseInt(routeID));
-	  setTimeout(function () {
-	    hashHistory.push('ninjas');
-	  }, 3000);
-
-	  return React.createElement(
-	    'div',
-	    null,
-	    React.createElement(
-	      'h1',
-	      null,
-	      ninja.name
-	    ),
-	    React.createElement(
-	      'p',
-	      null,
-	      ninja.description
-	    ),
-	    '// ',
-	    React.createElement(
-	      Link,
-	      { to: '/ninjas' },
-	      'Back'
-	    )
-	  );
-	}
+	var NinjaComponent = __webpack_require__(231);
+	var NinjaDescription = __webpack_require__(233);
 
 	var App = React.createClass({
 	  displayName: 'App',
@@ -26063,6 +25980,127 @@
 	  }
 	]
 
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(38);
+	var ReactRouter = __webpack_require__(168);
+	var Router = ReactRouter.Router,
+	    Route = ReactRouter.Route,
+	    hashHistory = ReactRouter.hashHistory;
+	var Link = ReactRouter.Link;
+
+	var NinjaList = __webpack_require__(232);
+
+	module.exports = React.createClass({
+	    displayName: 'exports',
+
+	    render: function () {
+	        console.log('in NinjaComponent render: ', this.props.route.data);
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'h1',
+	                null,
+	                'Greetings Ninja!'
+	            ),
+	            React.createElement(
+	                'h2',
+	                null,
+	                'Click on a ninja for more information'
+	            ),
+	            React.createElement(NinjaList, { turtles: this.props.route.data }),
+	            this.props.children
+	        );
+	    }
+	});
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(38);
+	var ReactRouter = __webpack_require__(168);
+	var Router = ReactRouter.Router,
+	    Route = ReactRouter.Route,
+	    hashHistory = ReactRouter.hashHistory;
+	var Link = ReactRouter.Link;
+
+	module.exports = React.createClass({
+	  displayName: 'exports',
+
+	  render: function () {
+	    console.log('this.props.turtles: ', this.props.turtles);
+	    var ninjas = this.props.turtles.map(function (turtle, idx) {
+	      return React.createElement(
+	        'li',
+	        { key: idx },
+	        React.createElement(
+	          Link,
+	          { to: 'ninjas/' + turtle.id },
+	          turtle.name
+	        )
+	      )
+	      // <li key={idx}>
+	      //   <a href="#">{turtle.name}</a>
+	      // </li>
+	      ;
+	    });
+	    return React.createElement(
+	      'ul',
+	      null,
+	      ninjas
+	    );
+	  }
+	});
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(38);
+	var ReactRouter = __webpack_require__(168);
+	var Router = ReactRouter.Router,
+	    Route = ReactRouter.Route,
+	    hashHistory = ReactRouter.hashHistory;
+	var Link = ReactRouter.Link;
+
+	module.exports = function NinjaDescription(props) {
+	  // Here's the route parameter (notice it's a string)
+	  var routeID = props.params.id;
+	  // Let's pass it into the method our Route parent provided and assign the result to a variable
+	  var ninja = props.route.fetchTurtle(parseInt(routeID));
+	  setTimeout(function () {
+	    hashHistory.push('ninjas');
+	  }, 3000);
+
+	  return React.createElement(
+	    'div',
+	    null,
+	    React.createElement(
+	      'h1',
+	      null,
+	      ninja.name
+	    ),
+	    React.createElement(
+	      'p',
+	      null,
+	      ninja.description
+	    ),
+	    '// ',
+	    React.createElement(
+	      Link,
+	      { to: '/ninjas' },
+	      'Back'
+	    )
+	  );
+	};
 
 /***/ }
 /******/ ]);

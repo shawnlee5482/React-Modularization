@@ -8,59 +8,8 @@ var Link = ReactRouter.Link;
 
 // This file holds our JSON array of turtles
 var data = require('./data.json');
-
-var NinjaList = React.createClass({
-  render: function(){
-    console.log('this.props.turtles: ', this.props.turtles);
-    var ninjas = this.props.turtles.map(function(turtle, idx){
-      return (
-        <li key={idx}>
-          <Link to={'ninjas/' + turtle.id}>{turtle.name}</Link>
-        </li>        
-        // <li key={idx}>
-        //   <a href="#">{turtle.name}</a>
-        // </li>
-      )
-    })
-    return (
-      <ul>
-        {ninjas}
-      </ul>
-    )
-  }
-});
-
-var NinjaComponent = React.createClass({
-    render: function (){
-    console.log('in NinjaComponent render: ', this.props.route.data);      
-        return (
-          <div>
-            <h1>Greetings Ninja!</h1>
-            <h2>Click on a ninja for more information</h2>
-            <NinjaList turtles={this.props.route.data}/>
-            {this.props.children}            
-          </div>
-        )
-    }
-});
-
-// ReactDOM.render(<NinjaComponent data={data}/>, document.getElementById('app'));
-
-function NinjaDescription(props){
-  // Here's the route parameter (notice it's a string)
-  var routeID = props.params.id
-  // Let's pass it into the method our Route parent provided and assign the result to a variable
-  var ninja = props.route.fetchTurtle(parseInt(routeID))
-  setTimeout(function() { hashHistory.push('ninjas')}, 3000);
-
-  return(
-    <div>
-      <h1>{ninja.name}</h1>
-      <p>{ninja.description}</p>
-      // <Link to='/ninjas'>Back</Link>
-    </div>
-  )
-}
+var NinjaComponent = require('./ninjacomponent.js');
+var NinjaDescription = require('./ninjadescription.js');
 
 var App = React.createClass({
   fetchTurtle: function(id) {
